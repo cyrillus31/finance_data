@@ -4,3 +4,6 @@
 /*.txt
 **/results/
 **/.DS_Store
+
+
+!requirements.txt
