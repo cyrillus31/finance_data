@@ -14,17 +14,17 @@ def generate_all_files(files=files):
             generator(file)
 
 def generate_compound_file():
-    root, folders, files = next(os.walk(cwd+"/results"))
+    root, folders, files = next(os.walk(os.path.join(cwd, "results")))
     temp_hash = set() 
 
-    with open("results/compound.csv", "w", encoding="UTF-8") as file:
+    with open(os.path.join("results","compound.csv"), "w", encoding="UTF-8") as file:
         writer = csv.writer(file)
         files.sort()
         for file in files:
             if file == "compound.csv":
                 pass
 
-            with open(root+"/"+file, "r", encoding="UTF-8") as input:
+            with open(os.path.join(root, file), "r", encoding="UTF-8") as input:
                 reader = csv.reader(input)
                 for row in reader:
                     if ''.join(row) in temp_hash:

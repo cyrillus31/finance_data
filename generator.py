@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def generator(input_name: str, output_name: str = "new"):
-    if not os.path.exists("results/"):
+    if not os.path.exists("results"):
         os.mkdir("results")
 
     with open(input_name, "r", encoding="UTF-8") as input:
@@ -40,10 +40,10 @@ def generator(input_name: str, output_name: str = "new"):
                 writer.writerow(row_data)
 
         # get the last date in the file
-        date = ":".join([p.zfill(2) for p in date.split("/")[::-1]])
+        date = ";".join([p.zfill(2) for p in date.split("/")[::-1]])
         finish = "_".join([date, time])
 
-        os.rename("results/"+output_name, f"results/{start.replace('/', '')}_-_{finish.replace('/','')}_{new_output_name}")
+        os.rename(os.path.join("results", output_name), os.path.join("results", f"{start.replace('/', '')}_-_{finish.replace('/','')}_{new_output_name}"))
 
 
-generator("aapl.us.txt", "new.csv")
+# generator("aapl.us.txt", "new.csv")
