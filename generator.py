@@ -6,12 +6,12 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 
-if not os.path.exists("results/"):
-    os.mkdir("results")
 
 
 
 def generator(input_name: str, output_name: str = "new"):
+    if not os.path.exists("results/"):
+        os.mkdir("results")
 
     with open(input_name, "r", encoding="UTF-8") as input:
         fieldnames = ["ticker", "per", "date", "time", "open", "high", "low", "close", "vol", "openint"]
@@ -46,4 +46,4 @@ def generator(input_name: str, output_name: str = "new"):
         os.rename("results/"+output_name, f"results/{start.replace('/', '')}_-_{finish.replace('/','')}_{new_output_name}")
 
 
-# generator("aapl.us.txt", "new.csv")
+generator("aapl.us.txt", "new.csv")
