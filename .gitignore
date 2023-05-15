@@ -5,6 +5,7 @@
 /*.txt
 **/results/
 **/.DS_Store
+**/.vscode/
 
 
 !requirements.txt

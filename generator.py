@@ -19,7 +19,7 @@ def generator(input_name: str, output_name: str = "new"):
 
 
         # create a new file
-        with open("results/"+output_name, "w", encoding="UTF-8") as output:
+        with open(os.path.join("results",output_name), "w", newline="", encoding="UTF-8") as output:
             writer = csv.writer(output)
             next(reader) #bypass the headers here
             for index, row in enumerate(reader):
@@ -28,20 +28,22 @@ def generator(input_name: str, output_name: str = "new"):
                 # converting time from CET to US/Eastern
                 date, time = convert_date_time(date, time)
 
-                # get the first date in the file
-                if index == 0:
-                    date = ":".join([p.zfill(2) for p in date.split("/")[::-1]])
-                    start = "_".join([date, time])
-                    title = row["ticker"]
-                    new_output_name = f"{title}.csv"
-
+                # record data to the output file
                 row_data = [date, time]
                 row_data.extend(list(map(float_format, [row["open"], row["high"], row["low"], row["close"]])))
                 writer.writerow(row_data)
 
+                # get the first date in the file
+                if index == 0:
+                    date = ";".join([p.zfill(2) for p in date.split("/")[::-1]])
+                    start = "_".join([date, time]).replace(":", ";")
+                    title = row["ticker"]
+                    new_output_name = f"{title}.csv"
+
+
         # get the last date in the file
         date = ";".join([p.zfill(2) for p in date.split("/")[::-1]])
-        finish = "_".join([date, time])
+        finish = "_".join([date, time]).replace(":", ";")
 
         os.rename(os.path.join("results", output_name), os.path.join("results", f"{start.replace('/', '')}_-_{finish.replace('/','')}_{new_output_name}"))
 

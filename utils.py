@@ -28,4 +28,4 @@ def convert_date_time(date: str, time: str) -> tuple[str]:
     # print(datetime.time(9, 36))
     if ny.time() < datetime.time(9, 35):
         raise Exception("Starting time goes below 9:35am")
-    return ny.strftime("%#d%#m%Y"), ny.strftime("%#H:%M")
+    return ny.strftime("%#d/%#m/%Y"), ny.strftime("%#H:%M")

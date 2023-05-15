@@ -17,7 +17,7 @@ def generate_compound_file():
     root, folders, files = next(os.walk(os.path.join(cwd, "results")))
     temp_hash = set() 
 
-    with open(os.path.join("results","compound.csv"), "w", encoding="UTF-8") as file:
+    with open(os.path.join("results","compound.csv"), "w", newline="", encoding="UTF-8") as file:
         writer = csv.writer(file)
         files.sort()
         for file in files:
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 Хотите их объединить? y/n:  """)
     if answer.lower()[0] == "y":
         generate_compound_file()
-        input("\nФайлы объеденены в файл compound.csv, который находится в папке results")
+        input("\nФайлы объеденены в файл compound.csv, который находится в папке results. Нажмите Enter чтобы продолжить")
         print("Работа программы будет прекращена")
         time.sleep(2)
         exit()
@@ -50,7 +50,3 @@ if __name__ == "__main__":
         print("\nРабота программы будет прекращена")
         time.sleep(2)
         exit()
-
-
-                
-
