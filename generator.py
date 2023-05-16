@@ -46,4 +46,4 @@ def generator(input_name: str, output_name: str = "new"):
         os.rename("results/"+output_name, f"results/{start.replace('/', '')}_-_{finish.replace('/','')}_{new_output_name}")
 
 
-generator("aapl.us.txt", "new.csv")
+# generator("aapl.us.txt", "new.csv")
