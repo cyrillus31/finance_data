@@ -6,6 +6,6 @@
 **/results/
 **/.DS_Store
 **/.vscode/
-
+**/dist/
 
 !requirements.txt

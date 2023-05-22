@@ -22,10 +22,11 @@ def convert_date_time(date: str, time: str) -> tuple[str]:
     hours = int(time[:2])
     minutes = int(time[2:4])
 
-    warsaw = datetime.datetime(year, month, day, hours, minutes, 0, tzinfo=warsawtz) + datetime.timedelta(minutes=5)
+    # warsaw = datetime.datetime(year, month, day, hours, minutes, 0, tzinfo=warsawtz) + datetime.timedelta(minutes=5)
+    warsaw = warsawtz.localize(datetime.datetime(year, month, day, hours, minutes, 0) + datetime.timedelta(minutes=5))
     ny = warsaw.astimezone(nytz)
     # print(ny.time())
     # print(datetime.time(9, 36))
-    if ny.time() < datetime.time(9, 35):
+    if ny.time() < datetime.time(9, 35) or ny.time() > datetime.time(16, 0):
         raise Exception("Starting time goes below 9:35am")
     return ny.strftime("%#d/%#m/%Y"), ny.strftime("%#H:%M")
