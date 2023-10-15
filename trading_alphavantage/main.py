@@ -4,6 +4,7 @@ import io
 from datetime import datetime
 
 from api_key import api_key
+import composer
 
 intervals =  {
    1: "1min",
@@ -115,9 +116,18 @@ def send_requests(params):
                 print(f'Файл{filename} создан. {count} из {len(params["symbols"]) * len(params["months"])}')
 
 if __name__ == "__main__":
-    params = generate_params()
-    send_requests(params)
-    print("Работа программы завершена")
+    while True:
+        user_input = input("Хотите объединить имеющиеся файлы? y/n: ").lower()
+        if "y" in user_input:
+            composer.main()
+            break
+        elif "n" in user_input:
+            params = generate_params()
+            send_requests(params)
+            continue
+        else:
+            print("Команда непонятна. Попробуйте еще раз.\n")
+    print("Работа программы будет завершена...")
     time.sleep(2)
 
 
