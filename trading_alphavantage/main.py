@@ -111,7 +111,10 @@ def send_requests(params):
                 
             with open(filename, "w+") as file:
                 for line in csv_file:
-                    file.write(row_reformat(line))
+                    try:
+                        file.write(row_reformat(line))
+                    except ValueError:
+                        continue
                     
                 print(f'Файл{filename} создан. {count} из {len(params["symbols"]) * len(params["months"])}')
 
